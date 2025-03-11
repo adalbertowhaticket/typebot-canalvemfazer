@@ -104,7 +104,7 @@ export const initWASocket = async (whatsapp: Whatsapp): Promise<Session> => {
             creds: state.creds,
             keys: makeCacheableSignalKeyStore(state.keys, logger),
           },
-          version: [2,3000,1015901307],
+          version,
           // defaultQueryTimeoutMs: 60000,
           // retryRequestDelayMs: 250,
           // keepAliveIntervalMs: 1000 * 60 * 10 * 3,
@@ -210,7 +210,7 @@ export const initWASocket = async (whatsapp: Whatsapp): Promise<Session> => {
             }
 
             if (qr !== undefined) {
-              if (retriesQrCodeMap.get(id) && retriesQrCodeMap.get(id) >= 3) {
+              if (retriesQrCodeMap.get(id) && retriesQrCodeMap.get(id) >= 5) {
                 await whatsappUpdate.update({
                   status: "DISCONNECTED",
                   qrcode: ""
